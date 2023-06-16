@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import styles from "./toDo.module.scss";
 import { createToDo, deleteToDo, getToDos, updateTodo } from "../../api/ToDo";
 import { ToDoObject } from "../../model";
+import { useNavigate } from "react-router-dom";
 
 const ToDo = () => {
+  const navigate = useNavigate();
   const [toDoList, setToDoList] = useState<ToDoObject[]>();
 
   const onGetToDos = async () => {
@@ -36,7 +38,11 @@ const ToDo = () => {
   };
 
   useEffect(() => {
-    onGetToDos();
+    if (!localStorage.getItem("ACCESS_TOKEN")) {
+      navigate("/signin");
+    } else {
+      onGetToDos();
+    }
   }, []);
 
   return (
