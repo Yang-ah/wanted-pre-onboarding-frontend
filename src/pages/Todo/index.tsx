@@ -1,40 +1,33 @@
 import React, { useEffect, useState } from "react";
 import styles from "./toDo.module.scss";
-import { createToDo, deleteToDo, getToDos, updateTodo } from "../../api/ToDo";
+import { createToDo, getToDos } from "../../api/ToDo";
 import { ToDoObject } from "../../model";
 import { useNavigate } from "react-router-dom";
+import Li from "./Li";
 
 const ToDo = () => {
   const navigate = useNavigate();
   const [toDoList, setToDoList] = useState<ToDoObject[]>();
+  const [newToDo, setNewToDo] = useState("");
+
+  const onChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const { value } = event.currentTarget;
+    setNewToDo(value);
+  };
 
   const onGetToDos = async () => {
     const response = await getToDos();
-    console.log(response.data);
     setToDoList(response.data);
   };
 
-  const onCreateToDo = async () => {
-    const response = await createToDo({
-      todo: "할거없움",
+  const onCreateToDo = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    await createToDo({
+      todo: newToDo,
     });
-    //console.log(response);
-    onGetToDos();
-  };
 
-  const onUpdateToDo = async () => {
-    const response = await updateTodo(
-      { todo: "안녕", isCompleted: true },
-      9076
-    );
-    //  console.log(response);
     onGetToDos();
-  };
-
-  const onDeleteToDo = async () => {
-    const response = await deleteToDo(9076);
-    //  console.log(response);
-    onGetToDos();
+    setNewToDo("");
   };
 
   useEffect(() => {
@@ -49,25 +42,28 @@ const ToDo = () => {
     <div>
       <h1>To Do List</h1>
 
-      <div>
-        <input type="text" />
-        <button onClick={onCreateToDo}>추가</button>
-      </div>
+      <form onSubmit={onCreateToDo}>
+        <input
+          type="text"
+          data-testid="new-todo-input"
+          value={newToDo}
+          onChange={onChange}
+        />
+        <button type="submit" data-testid="new-todo-add-button">
+          추가
+        </button>
+      </form>
+
       <ul>
         {toDoList?.map((toDo: ToDoObject) => {
           return (
-            <li key={toDo.id}>
-              <label>
-                <input type="checkbox" />
-                <span>{toDo.todo}</span>
-              </label>
-              <button value={toDo.id} name="modify" onClick={onUpdateToDo}>
-                modify
-              </button>
-              <button value={toDo.id} name="delete" onClick={onDeleteToDo}>
-                delete
-              </button>
-            </li>
+            <Li
+              key={toDo.id}
+              todo={toDo.todo}
+              isCompleted={toDo.isCompleted}
+              id={toDo.id}
+              updateFunction={onGetToDos}
+            />
           );
         })}
       </ul>

@@ -14,3 +14,8 @@ export type ToDoObject = ToDo & {
   id: number;
   userId: number;
 };
+
+export type ToDoLi = ToDo & {
+  id: number;
+  updateFunction: () => Promise<void>;
+};
