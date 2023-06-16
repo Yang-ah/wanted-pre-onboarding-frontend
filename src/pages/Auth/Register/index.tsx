@@ -1,17 +1,26 @@
 import React from "react";
 import styles from "./register.module.scss";
+import { signUp } from "../../../api/Auth";
 
 const Register = () => {
+  const postSignUp = async () => {
+    const response = await signUp({
+      email: "bbbb@aa.com",
+      password: "abcdabcd",
+    });
+    // console.log(response);
+  };
+
   return (
     <div>
       <h1>회원가입</h1>
-      <form>
+      <div>
         <input type="email" data-testid="email-input" />
         <input type="password" data-testid="password-input" />
-        <button type="submit" data-testid="signup-button">
+        <button type="button" data-testid="signup-button" onClick={postSignUp}>
           회원가입
         </button>
-      </form>
+      </div>
     </div>
   );
 };
