@@ -1,9 +1,5 @@
+import { IAuth } from "./../../model/index";
 import apiClient from "../apiClient";
-
-interface IAuth {
-  email: string;
-  password: string;
-}
 
 export const signUp = (body: IAuth) => {
   return apiClient.post("/auth/signup", body, {

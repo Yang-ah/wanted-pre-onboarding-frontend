@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "./toDo.module.scss";
 import { createToDo, deleteToDo, getToDos, updateTodo } from "../../api/ToDo";
+import { ToDoObject } from "../../model";
 
 const ToDo = () => {
-  const [toDoList, setToDoList] = useState<any[]>();
+  const [toDoList, setToDoList] = useState<ToDoObject[]>();
 
   const onGetToDos = async () => {
     const response = await getToDos();
@@ -47,7 +48,7 @@ const ToDo = () => {
         <button onClick={onCreateToDo}>추가</button>
       </div>
       <ul>
-        {toDoList?.map((toDo: any) => {
+        {toDoList?.map((toDo: ToDoObject) => {
           return (
             <li key={toDo.id}>
               <label>
