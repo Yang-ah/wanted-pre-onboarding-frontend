@@ -3,7 +3,7 @@
 
 .wrap {
   @include m.flex(center, center, column);
-  height: 80%;
+  height: 90%;
 
   > h1 {
     @include m.title();
@@ -17,17 +17,21 @@
       fill: c.$C_PRIMARY;
     }
   }
+  > ul {
+    width: 400px;
+    height: 380px;
+    overflow-y: scroll;
+  }
 }
 
 .form {
   @include m.flex(space-between);
-
   width: 400px;
   height: 40px;
   padding: 8px 4px;
   background-color: c.$C_LIGHT_GREY;
   overflow: hidden;
-  margin: 40px 0;
+  margin: 40px 0 20px;
   border-radius: 20px;
 
   > input {

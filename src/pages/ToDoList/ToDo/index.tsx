@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { ToDoLi } from "../../../model";
 import { deleteToDo, updateTodo } from "../../../api/ToDo";
-import { IconLemon } from "../../../assets";
+import { IconCheck, IconLemon } from "../../../assets";
+import styles from "./toDo.module.scss";
 
-const Li = ({ todo, isCompleted, id, updateFunction }: ToDoLi) => {
+const ToDo = ({ todo, isCompleted, id, updateFunction }: ToDoLi) => {
   const [onModify, setOnModify] = useState(false);
   const [modifiedTodo, setModifiedTodo] = useState({
     todo,
@@ -22,7 +23,10 @@ const Li = ({ todo, isCompleted, id, updateFunction }: ToDoLi) => {
     updateFunction();
   };
 
-  const onUpdateToDo = async () => {
+  const onUpdateToDo = async (
+    event: React.FormEvent<HTMLFormElement | HTMLButtonElement>
+  ) => {
+    event.preventDefault();
     await updateTodo(
       { todo: modifiedTodo.todo, isCompleted: modifiedTodo.isCompleted },
       id
@@ -43,31 +47,36 @@ const Li = ({ todo, isCompleted, id, updateFunction }: ToDoLi) => {
   };
 
   return (
-    <li>
-      <label>
+    <li className={styles.wrap}>
+      <label className={styles.checkLabel}>
         <input
           type="checkbox"
           checked={modifiedTodo.isCompleted}
           onChange={onChange}
         />
-        <IconLemon />
+        <div className={styles.icon}>
+          <IconLemon className={styles.lemon} />
+          <IconCheck className={styles.check} />
+        </div>
         {onModify || <span>{todo}</span>}
       </label>
 
       {onModify && (
-        <>
+        <form onSubmit={onUpdateToDo}>
           <input
             type="text"
             name="todo"
             data-testid="modify-input"
             value={modifiedTodo.todo}
             onChange={onChange}
+            className={styles.modifyInput}
           />
           <button
             value={id}
-            type="button"
+            type="submit"
             data-testid="submit-button"
             onClick={onUpdateToDo}
+            className={styles.basicButton}
           >
             제출
           </button>
@@ -75,11 +84,12 @@ const Li = ({ todo, isCompleted, id, updateFunction }: ToDoLi) => {
             value={id}
             type="button"
             data-testid="cancel-button"
+            className={styles.basicButton}
             onClick={cancelModify}
           >
             취소
           </button>
-        </>
+        </form>
       )}
 
       {onModify || (
@@ -90,16 +100,19 @@ const Li = ({ todo, isCompleted, id, updateFunction }: ToDoLi) => {
             name="modify"
             data-testid="modify-button"
             onClick={onSetModifyMode}
+            className={styles.basicButton}
           >
-            modify
+            수정
           </button>
           <button
             value={id}
             name="delete"
+            type="button"
             data-testid="delete-button"
             onClick={onDeleteToDo}
+            className={styles.basicButton}
           >
-            delete
+            삭제
           </button>
         </>
       )}
@@ -107,4 +120,4 @@ const Li = ({ todo, isCompleted, id, updateFunction }: ToDoLi) => {
   );
 };
 
-export default Li;
+export default ToDo;

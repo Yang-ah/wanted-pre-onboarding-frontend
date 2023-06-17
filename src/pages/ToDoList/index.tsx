@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./toDo.module.scss";
+import styles from "./toDoList.module.scss";
 import { createToDo, getToDos } from "../../api/ToDo";
 import { ToDoObject } from "../../model";
 import { useNavigate } from "react-router-dom";
@@ -45,7 +45,7 @@ const ToDoList = () => {
 
   return (
     <main className={styles.wrap}>
-      <h1>To Do List</h1>
+      <h1>To Do List ({toDoList?.length})</h1>
       <p>
         할 일을 추가하고, 완료하면 레몬
         <IconLemon />을 클릭해보세요 :)
