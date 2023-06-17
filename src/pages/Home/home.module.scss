@@ -10,14 +10,15 @@
   > h1 {
     font-size: 42px;
     padding: 20px 0;
+    color: c.$C_BLACK;
 
     > span {
-      color: c.$C_PRIMARY;
+      @include m.title(42px);
     }
   }
 
   > .description {
-    color: grey;
+    color: c.$C_GREY;
     white-space: pre-wrap;
     line-height: 1.4;
     text-align: center;
@@ -25,13 +26,8 @@
   }
 
   > button {
+    @include m.button();
     width: 100px;
-    padding: 12px;
-    color: white;
-    background-color: c.$C_PRIMARY;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 16px;
     margin: 40px 0;
   }
 }

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import styles from "./login.module.scss";
+import styles from "../auth.module.scss";
 import { signIn } from "../../../api/Auth";
 import { IAuth } from "../../../model";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -58,23 +58,28 @@ const Login = () => {
 
   return (
     <div className={styles.wrap}>
-      <h1>Login</h1>
-      <form onSubmit={onSubmit}>
+      <h1>Sign in</h1>
+      <form onSubmit={onSubmit} className={styles.form}>
         <input
           type="email"
           data-testid="email-input"
           value={form.email}
           onChange={onChange}
+          placeholder="이메일"
         />
         <input
           type="password"
           data-testid="password-input"
           value={form.password}
           onChange={onChange}
+          placeholder="비밀번호"
         />
         <button type="submit" data-testid="signin-button" disabled={pass}>
           로그인
         </button>
+        <Link to="/signup" className={styles.link}>
+          회원가입 하시겠습니까?
+        </Link>
       </form>
     </div>
   );

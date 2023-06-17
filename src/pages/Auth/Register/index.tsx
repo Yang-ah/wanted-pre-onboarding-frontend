@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import styles from "./register.module.scss";
+import styles from "../auth.module.scss";
 import { signUp } from "../../../api/Auth";
 import { IAuth } from "../../../model";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -55,25 +55,30 @@ const Register = () => {
   }, []);
 
   return (
-    <div>
-      <h1>회원가입</h1>
-      <form onSubmit={onSubmit}>
+    <div className={styles.wrap}>
+      <h1>Sign up</h1>
+      <form onSubmit={onSubmit} className={styles.form}>
         <input
           type="email"
           data-testid="email-input"
           value={form.email}
           onChange={onChange}
+          placeholder="이메일"
         />
         <input
           type="password"
           data-testid="password-input"
           value={form.password}
           onChange={onChange}
+          placeholder="비밀번호"
         />
         <button type="submit" data-testid="signup-button" disabled={pass}>
           회원가입
         </button>
       </form>
+      <Link to="/signin" className={styles.link}>
+        로그인 하시겠습니까?
+      </Link>
     </div>
   );
 };
