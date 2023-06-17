@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ToDoLi } from "../../../model";
-import { deleteToDo, updateTodo } from "../../../api/ToDo";
+import { deleteToDo, updateTodo } from "../../../api/ToDoList";
 import { IconCheck, IconLemon } from "../../../assets";
 import styles from "./toDo.module.scss";
 

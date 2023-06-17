@@ -1,4 +1,4 @@
-import { ToDo, OnlyToDo } from "./../../model/index";
+import { ToDo, OnlyToDo } from "../../model/index";
 import apiClient from "../apiClient";
 
 export const createToDo = (body: OnlyToDo) => {

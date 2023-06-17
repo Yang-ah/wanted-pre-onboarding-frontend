@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./toDoList.module.scss";
-import { createToDo, getToDos } from "../../api/ToDo";
+import { createToDo, getToDos } from "../../api/ToDoList";
 import { ToDoObject } from "../../model";
 import { useNavigate } from "react-router-dom";
 import ToDo from "./ToDo";
