@@ -4,9 +4,10 @@ import {
   Route,
 } from "react-router-dom";
 import { HomePage, RegisterPage, LoginPage, TodoPage } from "../pages";
+import { Layout } from "../components";
 
 const router = (
-  <Route>
+  <Route element={<Layout />}>
     <Route path="/" element={<HomePage />} />
     <Route path="/signup" element={<RegisterPage />} />
     <Route path="/signin" element={<LoginPage />} />
