@@ -55,7 +55,7 @@ const Register = () => {
   }, []);
 
   return (
-    <div className={styles.wrap}>
+    <main className={styles.wrap}>
       <h1>Sign up</h1>
       <form onSubmit={onSubmit} className={styles.form}>
         <input
@@ -79,7 +79,7 @@ const Register = () => {
       <Link to="/signin" className={styles.link}>
         로그인 하시겠습니까?
       </Link>
-    </div>
+    </main>
   );
 };
 

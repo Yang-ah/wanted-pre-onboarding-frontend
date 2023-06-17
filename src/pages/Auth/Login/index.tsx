@@ -43,7 +43,7 @@ const Login = () => {
       }
       navigate("/todo");
     } catch (error) {
-      console.log("login err: ", error);
+      //  console.log("login err: ", error);
       localStorage.clear();
       alert("로그인 오류입니다🫠,, 다시 시도해보시겠어요?");
     }
@@ -57,7 +57,7 @@ const Login = () => {
   }, []);
 
   return (
-    <div className={styles.wrap}>
+    <main className={styles.wrap}>
       <h1>Sign in</h1>
       <form onSubmit={onSubmit} className={styles.form}>
         <input
@@ -81,7 +81,7 @@ const Login = () => {
           회원가입 하시겠습니까?
         </Link>
       </form>
-    </div>
+    </main>
   );
 };
 

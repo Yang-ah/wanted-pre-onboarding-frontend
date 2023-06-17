@@ -3,9 +3,10 @@ import styles from "./toDo.module.scss";
 import { createToDo, getToDos } from "../../api/ToDo";
 import { ToDoObject } from "../../model";
 import { useNavigate } from "react-router-dom";
-import Li from "./Li";
+import ToDo from "./ToDo";
+import { IconLemon } from "../../assets";
 
-const ToDo = () => {
+const ToDoList = () => {
   const navigate = useNavigate();
   const [toDoList, setToDoList] = useState<ToDoObject[]>();
   const [newToDo, setNewToDo] = useState("");
@@ -22,6 +23,10 @@ const ToDo = () => {
 
   const onCreateToDo = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!newToDo) {
+      return;
+    }
+
     await createToDo({
       todo: newToDo,
     });
@@ -39,25 +44,33 @@ const ToDo = () => {
   }, []);
 
   return (
-    <div>
+    <main className={styles.wrap}>
       <h1>To Do List</h1>
+      <p>
+        할 일을 추가하고, 완료하면 레몬
+        <IconLemon />을 클릭해보세요 :)
+      </p>
 
-      <form onSubmit={onCreateToDo}>
+      <form onSubmit={onCreateToDo} className={styles.form}>
         <input
           type="text"
           data-testid="new-todo-input"
           value={newToDo}
           onChange={onChange}
         />
-        <button type="submit" data-testid="new-todo-add-button">
-          추가
+        <button
+          type="submit"
+          disabled={!newToDo}
+          data-testid="new-todo-add-button"
+        >
+          +
         </button>
       </form>
 
       <ul>
         {toDoList?.map((toDo: ToDoObject) => {
           return (
-            <Li
+            <ToDo
               key={toDo.id}
               todo={toDo.todo}
               isCompleted={toDo.isCompleted}
@@ -67,8 +80,8 @@ const ToDo = () => {
           );
         })}
       </ul>
-    </div>
+    </main>
   );
 };
 
-export default ToDo;
+export default ToDoList;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ToDoLi } from "../../../model";
 import { deleteToDo, updateTodo } from "../../../api/ToDo";
+import { IconLemon } from "../../../assets";
 
 const Li = ({ todo, isCompleted, id, updateFunction }: ToDoLi) => {
   const [onModify, setOnModify] = useState(false);
@@ -49,6 +50,7 @@ const Li = ({ todo, isCompleted, id, updateFunction }: ToDoLi) => {
           checked={modifiedTodo.isCompleted}
           onChange={onChange}
         />
+        <IconLemon />
         {onModify || <span>{todo}</span>}
       </label>
 
