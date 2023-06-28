@@ -13,8 +13,117 @@
 $ npm install
 $ npm run start
 ```
+<br>
+
+## 사용한 라이브러리
+
+- `React Router` : 각 path에 맞는 페이지 라우팅
+- `Axios` : instance 생성&interceptor 사용하여 api 호출 시 공통적으로 필요한 header 넣어서, api 호출 간편화 
+- `SCSS` : module.scss 사용을 통해 통일된 className 네이밍 
+- `TypeScript` : 타입 지정을 통해 정적 개발 및 자동 완성 기능 사용, 런타임 오류 방지
+  
+<br>
+
+## 디렉토리 구조&역할
+
+ ```plain
+ 📂src
+	├─ api # axios
+	│  ├─ Auth
+	│  ├─ ToDoList
+	│  └─ apiClient
+	├─ assets #svg files
+	├─ config
+	├─ model #types
+	├─ router
+	├─ components
+	│  └─ Layout # Nav, module.scss
+	├─ pages
+	│  ├─ Auth # Login, Register, module.scss
+	│  ├─ Home # module.scss
+	│  └─ ToDoList # module.scss, ToDo
+	├─ style # constants, fonts, mixins, global
+	└─ index.tsx
+```
+
+- `📁api` : axios instance 생성,  API 호출하는 함수들 선언
+
+- `📁assets` : 프로젝트에 필요한 svg file들을 모아놓고 react component로 내보냄
+
+- `📁config` : .env파일로 api 주소를 보관하고 있고, 이를 호출하는 역할.
+  <br>(환경 변수 설정의 번거로움을 줄이기 위해 .env 파일은 github에 공개) 
+
+- `📁model` : 프로젝트에 필요한 type 선언 
+
+- `📁router` : 각 path에 맞는 page들 라우팅
+
+- `📂components` :  프로젝트 공통으로 사용되는 컴포넌트 정의 
+
+  - `📁Layout` : 프로젝트 레이아웃 정의 
+
+- `📁pages` : Auth, Home, ToDoList 3페이지 정의
+
 
 <br>
+
+## 개발 전략
+
+### Flow
+style init > route > feature > design > docs 
+
+### Focus
+- 폴더 구조화
+- 페이지 접근 용이한 nav 구성
+  - 평가 시 토큰 유무에 따른 redirect 확인을 위해 logout(storage.clear)기능 추가
+- 직관적이지만 지루하지 않고 깔끔한 UI
+
+### Commit Convention
+- `Feat`    : 기능 (새로운 기능)
+- `Fix`     : 버그 (버그 수정)
+- `Design`  : CSS 등 사용자 UI 디자인 변경
+- `Style`   : 스타일 (코드 형식, 세미콜론 추가: 비즈니스 로직에 변경 없음)
+- `Refactor`: 리팩토링
+- `Comment` : 필요한 주석 추가 및 변경
+- `Docs`    : 문서 (문서 추가, 수정, 삭제)
+- `Test`    : 테스트 (테스트 코드 추가, 수정, 삭제: 비즈니스 로직에 변경 없음)
+- `Chore`   : 기타 변경사항 (빌드 스크립트, 패키지 매니저 설정 수정 등)
+- `Rename`  : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우
+- `Remove`  : 파일을 삭제하는 작업만 수행한 경우
+- `!HOTFIX` : 급하게 치명적인 버그를 고쳐야하는 경우
+- `!BREAKING CHANGE` : CHANGE 커다란 API 변경의 경우
+
+
+<br>
+
+## 스타일
+- scss를 통해 필요한 스타일들을 분리하여 관리하고, 재사용 가능한 mixins,constants 생성 
+- 각 페이지&컴포넌트 별 module scss 사용하여 용도에 맞는 일관된 className 사용
+
+### 스타일 디렉토리 구조&역할 
+```plain
+📂style
+	├─ constants # colors
+	├─ fonts/NanumSquareRound #fonts
+	├─ mixins
+	│  ├─ _flexbox.scss # flex(justifycontent, ....)
+	│  ├─ _styles.scss # button, title style
+	│  └─ _index.scss # forward sibling styles
+	├─ _base.scss # set base css
+	├─ _fonts_face.scss
+	├─ _reset.scss # reset all css
+	└─ global.scss # import (reset, base, fonts_face)
+```
+
+- `mixins` : flexbox, 공통 style(button, title)을 index파일에 forward하여 재사용가능한 style 선언
+
+- `constants` : colors 변수 선언 
+
+- `global.scss` : 공통 style만 import
+
+<br>
+
+
+
 
 ## 데모 영상
 
@@ -22,8 +131,8 @@ $ npm run start
 
 ### Home
 
-| TOKEN❌                                                                                                                      | TOKEN⭕️                                                                                                                    |
-| ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| TOKEN❌                        | TOKEN⭕️          |
+| -------------------------------------------------------- | -------------------------------------------------------------- |
 | <img src="https://github.com/Yang-ah/wanted-pre-onboarding-frontend/assets/97151214/01128ec0-8143-434b-aa77-1fafcae4587a" /> | <img src="https://github.com/Yang-ah/wanted-pre-onboarding-frontend/assets/97151214/8210be6e-f0dc-4b7b-a76b-5928cc5335d5"/> |
 | · `시작하기` 클릭 시 /signin 경로 이동                                                                                       | · `시작하기` 클릭 시 /todo 경로로 이동                                                                                      |
 
