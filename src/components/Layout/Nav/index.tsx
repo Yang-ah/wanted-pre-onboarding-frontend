@@ -4,7 +4,7 @@ import styles from "./nav.module.scss";
 import { IconLemon } from "../../../assets";
 
 const Nav = () => {
-  const onClick = () => localStorage.clear();
+  const logout = () => localStorage.clear();
 
   return (
     <nav className={styles.wrap}>
@@ -17,7 +17,7 @@ const Nav = () => {
       <div className={styles.right}>
         <Link to="/signin">Sign In</Link>
         <Link to="/signup">Sign Up</Link>
-        <Link to="/" onClick={onClick}>
+        <Link to="/" onClick={logout}>
           Logout
         </Link>
       </div>

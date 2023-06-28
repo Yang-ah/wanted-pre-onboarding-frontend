@@ -6,11 +6,12 @@ const apiClient = axios.create({
   timeout: 5_000,
 });
 
-apiClient.interceptors.request.use(async (config) => {
+apiClient.interceptors.request.use((config) => {
   const accessToken = localStorage.getItem("ACCESS_TOKEN");
 
   if (accessToken) {
     config.headers["Authorization"] = `Bearer ${accessToken}`;
+    config.headers["Content-Type"] = "application/json";
   }
 
   return config;

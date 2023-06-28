@@ -23,9 +23,7 @@ const ToDoList = () => {
 
   const onCreateToDo = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!newToDo) {
-      return;
-    }
+    if (!newToDo) return;
 
     await createToDo({
       todo: newToDo,
